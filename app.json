@@ -3,6 +3,7 @@
     "name": "shopeymart",
     "slug": "shopeymart",
     "version": "1.0.0",
+    "scheme": "shopeymart",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
