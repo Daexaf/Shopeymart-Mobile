@@ -1,5 +1,13 @@
 import React from "react";
-import { View, Text, Button, StyleSheet, TextInput, Image } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  TextInput,
+  Image,
+  ScrollView,
+} from "react-native";
 import Color from "../../components/Utils/Color";
 import { ClerkProvider, SignedIn, SignedOut, useAuth } from "@clerk/clerk-expo";
 import * as SecureStore from "expo-secure-store";
@@ -76,13 +84,14 @@ const HomeScreen = ({ navigation }) => {
   };
 
   return (
-    <View>
-      <Header />
-      {/* <Slider /> */}
-      <Text style={styles.title}>Ini setelah login</Text>
-      <SignOut />
+    <ScrollView>
+      <View>
+        <Header />
+        <Slider />
+        <Text style={styles.title}>Ini setelah login</Text>
+        <SignOut />
 
-      {/* <Carousel
+        {/* <Carousel
         data={featuredProducts}
         renderItem={renderCarouselItem}
         sliderWidth={300} // Pastikan sliderWidth dan itemWidth terdefinisi sebelumnya
@@ -93,7 +102,7 @@ const HomeScreen = ({ navigation }) => {
         inactiveSlideScale={0.9}
       /> */}
 
-      {/* <Text style={styles.label}>Email</Text>
+        {/* <Text style={styles.label}>Email</Text>
       <TextInput
         style={styles.input}
         onChangeText={(text) => setEmail(text)}
@@ -113,8 +122,9 @@ const HomeScreen = ({ navigation }) => {
         placeholderTextColor="#777"
       /> */}
 
-      {/* <Button title="Login" onPress={() => navigation.navigate("Detail")} /> */}
-    </View>
+        {/* <Button title="Login" onPress={() => navigation.navigate("Detail")} /> */}
+      </View>
+    </ScrollView>
   );
 };
 

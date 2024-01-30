@@ -21,29 +21,34 @@ import { useOAuth } from "@clerk/clerk-expo";
 import axios from "../../api/axiosInterceptor";
 
 WebBrowser.maybeCompleteAuthSession();
-export default function LoginScreen({ navigation }) {
+export default function RegisterScreen({ navigation }) {
   const [text, onChangeText] = React.useState("");
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
-  useWarmUpBrowser();
+  const [name, setName] = React.useState("");
+  const [address, setAddress] = React.useState("");
+  const [mobilePhone, setMobilePhone] = React.useState("");
+  const [email, setEmail] = React.useState("");
 
-  const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
-
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     axios
-      .post(`http://192.168.222.125:8099/api/auth/login`, {
+      .post(`http://192.168.222.125:8099/api/auth/register`, {
         username,
         password,
+        name,
+        address,
+        mobilePhone,
+        email,
       })
       .then(async (res) => {
         setUsername("");
         setPassword("");
+        setName("");
+        setAddress("");
+        setMobilePhone("");
+        setEmail("");
 
-        await AsyncStorage.setItem("token", res.data.token);
-        await AsyncStorage.setItem("username", res.data.username);
-        await AsyncStorage.setItem("role", res.data.role);
-
-        navigation.navigate("home");
+        navigation.navigate("login");
       })
       .catch((err) => {
         console.log(err);
@@ -51,8 +56,8 @@ export default function LoginScreen({ navigation }) {
     // localStorage.setItem("isSignedIn", true);
   };
 
-  const handleRegister = () => {
-    navigation.navigate("register");
+  const handleLogin = () => {
+    navigation.navigate("login");
   };
   const onPress = React.useCallback(async () => {
     try {
@@ -80,7 +85,7 @@ export default function LoginScreen({ navigation }) {
           <Text
             style={{ fontSize: 20, color: Color.WHITE, textAlign: "center" }}
           >
-            Let's Shopping
+            Let's Register
           </Text>
           <View>
             <Text style={styles.label}>Username</Text>
@@ -96,11 +101,55 @@ export default function LoginScreen({ navigation }) {
               value={password}
               secureTextEntry={true}
             />
-            {/* <Button
-            title="Press me"
-            onPress={() => navigation.navigate("Home")}
-            style={{ marginTop: 5, borderRadius: 30 }}
-          /> */}
+            <Text style={styles.label}>Name</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setName}
+              value={name}
+            />
+            <Text style={styles.label}>Address</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setAddress}
+              value={address}
+            />
+            <Text style={styles.label}>Mobile Phone</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setMobilePhone}
+              value={mobilePhone}
+            />
+            <Text style={styles.label}>Email</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setEmail}
+              value={email}
+            />
+            <TouchableOpacity style={styles.button} onPress={handleRegister}>
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontSize: 17,
+                  color: Color.PRIMARY,
+                }}
+              >
+                Register
+              </Text>
+            </TouchableOpacity>
+          </View>
+          {/* <Text
+            style={{
+              fontSize: 10,
+              color: Color.WHITE,
+              textAlign: "center",
+              marginTop: 20,
+            }}
+          >
+            The Bost App To Find Services Near You
+          </Text> */}
+
+          <View>
+            <Text>ALready have account?</Text>
             <TouchableOpacity style={styles.button} onPress={handleLogin}>
               <Text
                 style={{
@@ -110,52 +159,6 @@ export default function LoginScreen({ navigation }) {
                 }}
               >
                 Login
-              </Text>
-            </TouchableOpacity>
-          </View>
-          {/* <Text
-          style={{
-            fontSize: 10,
-            color: Color.WHITE,
-            textAlign: "center",
-            marginTop: 20,
-          }}
-        >
-          The Bost App To Find Services Near You
-        </Text> */}
-
-          {/* <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("LoginAcc")}
-        >
-          <Text
-            style={{ textAlign: "center", fontSize: 17, color: Color.PRIMARY }}
-          >
-            Login Account
-          </Text>
-        </TouchableOpacity> */}
-          <TouchableOpacity style={styles.button} onPress={onPress}>
-            <Text
-              style={{
-                textAlign: "center",
-                fontSize: 17,
-                color: Color.PRIMARY,
-              }}
-            >
-              Login With Google
-            </Text>
-          </TouchableOpacity>
-          <View>
-            <Text>Dont have account?</Text>
-            <TouchableOpacity style={styles.button} onPress={handleRegister}>
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontSize: 17,
-                  color: Color.PRIMARY,
-                }}
-              >
-                Register Now
               </Text>
             </TouchableOpacity>
           </View>
@@ -175,7 +178,7 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     minWidth: "100%",
-    height: "70%",
+    height: "100%",
     backgroundColor: Color.PRIMARY,
     marginTop: -200,
     borderTopLeftRadius: 30,

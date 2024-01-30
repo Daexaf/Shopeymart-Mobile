@@ -12,6 +12,7 @@ import { LogBox } from "react-native";
 import { useFonts } from "expo-font";
 import LoginAccScreen from "./App/Screens/LoginScreen/LoginAccScreen";
 import { Axios } from "axios";
+import RegisterScreen from "./App/Screens/RegisterScreen/RegisterScreen";
 
 // YellowBox.ignoreWarnings(["ViewPropTypes will be removed"]);
 LogBox.ignoreLogs(["YellowBox message you want to ignore"]);
@@ -54,22 +55,11 @@ const SignOut = () => {
 };
 
 export default function App() {
-  const [signedIn, setSignedIn] = React.useState(false);
   const [fontsLoaded, fontError] = useFonts({
     "Oswald-bold": require("../shopeymart/assets/font/static/Oswald-Bold.ttf"),
     "Oswald-Regular": require("../shopeymart/assets/font/static/Oswald-Regular.ttf"),
     "Oswald-SemiBold": require("../shopeymart/assets/font/static/Oswald-SemiBold.ttf"),
   });
-
-  const getIsSignedIn = async () => {
-    let isSignedIn = await AsyncStorage.getItem("token");
-    setSignedIn(isSignedIn ? true : false);
-  };
-
-  React.useEffect(() => {
-    console.log();
-    getIsSignedIn();
-  }, []);
 
   return (
     // <ClerkProvider publishableKey="pk_test_dW5iaWFzZWQtd2FscnVzLTgzLmNsZXJrLmFjY291bnRzLmRldiQ">
@@ -96,22 +86,17 @@ export default function App() {
           </NavigationContainer>
           {/* <SignOut /> */}
         </SignedIn>
-        {signedIn ? (
+        <SignedOut>
           <NavigationContainer>
-            <TabNavigation />
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+              {/* <LoginScreen /> */}
+              <Stack.Screen name="login" component={LoginScreen} />
+              <Stack.Screen name="LoginAcc" component={LoginAccScreen} />
+              <Stack.Screen name="home" component={TabNavigation} />
+              <Stack.Screen name="register" component={RegisterScreen} />
+            </Stack.Navigator>
           </NavigationContainer>
-        ) : (
-          <SignedOut>
-            <NavigationContainer>
-              <Stack.Navigator screenOptions={{ headerShown: false }}>
-                {/* <LoginScreen /> */}
-                <Stack.Screen name="login" component={LoginScreen} />
-                <Stack.Screen name="LoginAcc" component={LoginAccScreen} />
-                <Stack.Screen name="home" component={TabNavigation} />
-              </Stack.Navigator>
-            </NavigationContainer>
-          </SignedOut>
-        )}
+        </SignedOut>
       </View>
     </ClerkProvider>
   );
@@ -121,6 +106,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: 40,
+    // paddingTop: 40,
   },
 });
