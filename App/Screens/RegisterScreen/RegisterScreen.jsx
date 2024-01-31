@@ -149,7 +149,9 @@ export default function RegisterScreen({ navigation }) {
           </Text> */}
 
           <View>
-            <Text>ALready have account?</Text>
+            <Text style={{ textAlign: "center", marginTop: 10 }}>
+              Already have account?
+            </Text>
             <TouchableOpacity style={styles.button} onPress={handleLogin}>
               <Text
                 style={{

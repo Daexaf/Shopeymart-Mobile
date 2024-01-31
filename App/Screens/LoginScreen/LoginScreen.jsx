@@ -78,7 +78,13 @@ export default function LoginScreen({ navigation }) {
 
         <View style={styles.subContainer}>
           <Text
-            style={{ fontSize: 20, color: Color.WHITE, textAlign: "center" }}
+            style={{
+              fontSize: 20,
+              color: Color.WHITE,
+              textAlign: "center",
+              fontWeight: "bold",
+              marginBottom: 10,
+            }}
           >
             Let's Shopping
           </Text>
@@ -88,6 +94,7 @@ export default function LoginScreen({ navigation }) {
               style={styles.input}
               onChangeText={setUsername}
               value={username}
+              autoCapitalize="none"
             />
             <Text style={styles.label}>Password</Text>
             <TextInput
@@ -95,12 +102,8 @@ export default function LoginScreen({ navigation }) {
               onChangeText={setPassword}
               value={password}
               secureTextEntry={true}
+              autoCapitalize="none"
             />
-            {/* <Button
-            title="Press me"
-            onPress={() => navigation.navigate("Home")}
-            style={{ marginTop: 5, borderRadius: 30 }}
-          /> */}
             <TouchableOpacity style={styles.button} onPress={handleLogin}>
               <Text
                 style={{
@@ -113,27 +116,6 @@ export default function LoginScreen({ navigation }) {
               </Text>
             </TouchableOpacity>
           </View>
-          {/* <Text
-          style={{
-            fontSize: 10,
-            color: Color.WHITE,
-            textAlign: "center",
-            marginTop: 20,
-          }}
-        >
-          The Bost App To Find Services Near You
-        </Text> */}
-
-          {/* <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("LoginAcc")}
-        >
-          <Text
-            style={{ textAlign: "center", fontSize: 17, color: Color.PRIMARY }}
-          >
-            Login Account
-          </Text>
-        </TouchableOpacity> */}
           <TouchableOpacity style={styles.button} onPress={onPress}>
             <Text
               style={{
@@ -146,7 +128,9 @@ export default function LoginScreen({ navigation }) {
             </Text>
           </TouchableOpacity>
           <View>
-            <Text>Dont have account?</Text>
+            <Text style={{ textAlign: "center", marginTop: 10 }}>
+              Dont have account?
+            </Text>
             <TouchableOpacity style={styles.button} onPress={handleRegister}>
               <Text
                 style={{
@@ -175,9 +159,9 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     minWidth: "100%",
-    height: "70%",
+    height: "100%",
     backgroundColor: Color.PRIMARY,
-    marginTop: -200,
+    marginTop: -100,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     padding: 20,
@@ -191,12 +175,12 @@ const styles = StyleSheet.create({
   label: {
     color: Color.WHITE,
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 18,
     textAlign: "center",
   },
   input: {
     height: 40,
-    margin: 12,
+    margin: 8,
     borderWidth: 1,
     padding: 10,
     backgroundColor: Color.WHITE,

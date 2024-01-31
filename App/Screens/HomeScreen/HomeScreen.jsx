@@ -7,6 +7,7 @@ import {
   TextInput,
   Image,
   ScrollView,
+  FlatList,
 } from "react-native";
 import Color from "../../components/Utils/Color";
 import { ClerkProvider, SignedIn, SignedOut, useAuth } from "@clerk/clerk-expo";
@@ -33,23 +34,33 @@ const HomeScreen = ({ navigation }) => {
   //   </View>
   // );
 
-  // const featuredProducts = [
-  //   {
-  //     id: 1,
-  //     name: "Product 1",
-  //     image: require("../../../assets/images/young-pretty.jpeg"),
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Product 2",
-  //     image: require("../../../assets/images/tense-young.jpeg"),
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Product 3",
-  //     image: require("../../../assets/images/scared-young.jpeg"),
-  //   },
-  // ];
+  const category = [
+    {
+      id: 1,
+      name: "Electronic",
+      image: require("../../../assets/images/cargo-truck.png"),
+    },
+    {
+      id: 2,
+      name: "Beauty",
+      image: require("../../../assets/images/mop.png"),
+    },
+    {
+      id: 3,
+      name: "Fashion",
+      image: require("../../../assets/images/support.png"),
+    },
+    // {
+    //   id: 4,
+    //   name: "Health",
+    //   image: require("../../../assets/images/cargo-truck.png"),
+    // },
+    // {
+    //   id: 5,
+    //   name: "Travel",
+    //   image: require("../../../assets/images/mop.png"),
+    // },
+  ];
 
   // const renderCarouselItem = ({ item }) => (
   //   <View style={styles.carouselItem}>
@@ -87,8 +98,33 @@ const HomeScreen = ({ navigation }) => {
     <ScrollView>
       <View>
         <Header />
+        <Image
+          style={styles.carouselImage}
+          source={require("../../../assets/images/banner2.png")}
+        />
         <Slider />
-        <Text style={styles.title}>Ini setelah login</Text>
+
+        <Image
+          style={styles.carouselImage}
+          source={require("../../../assets/images/banner1.png")}
+        />
+        <View>
+          <Text style={styles.heading}>Our Top Category</Text>
+          <FlatList
+            data={category}
+            horizontal
+            style={{ padding: 10 }}
+            renderItem={({ item, index }) => (
+              <View>
+                <Image source={item.image} style={styles.sliderImage} />
+                <Text style={{ fontSize: 18, textAlign: "center" }}>
+                  {item.name}
+                </Text>
+              </View>
+            )}
+          />
+        </View>
+
         <SignOut />
 
         {/* <Carousel
@@ -101,28 +137,6 @@ const HomeScreen = ({ navigation }) => {
         inactiveSlideOpacity={0.5}
         inactiveSlideScale={0.9}
       /> */}
-
-        {/* <Text style={styles.label}>Email</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={(text) => setEmail(text)}
-        value={email}
-        placeholder="Enter Email"
-        keyboardType="email-address"
-        placeholderTextColor="#777"
-      />
-
-      <Text style={styles.label}>Password</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={(text) => setPassword(text)}
-        value={password}
-        placeholder="Enter Password"
-        secureTextEntry={true}
-        placeholderTextColor="#777"
-      /> */}
-
-        {/* <Button title="Login" onPress={() => navigation.navigate("Detail")} /> */}
       </View>
     </ScrollView>
   );
@@ -174,11 +188,31 @@ const styles = StyleSheet.create({
   carouselImage: {
     width: "100%",
     height: 150,
+    borderRadius: 10,
+    marginTop: 20,
   },
   carouselItemTitle: {
     fontSize: 20,
     fontWeight: "bold",
     color: "#ECF0F1", // Ubah warna teks sesuai kebutuhan
+  },
+  heading: {
+    fontSize: 20,
+    // color: "#ECF0F1", // Ubah warna teks sesuai kebutuhan
+    // fontFamily: "Oswald-bold",
+    textAlign: "center",
+    marginTop: 20,
+  },
+  sliderImage: {
+    width: 150, // Sesuaikan lebar gambar sesuai kebutuhan
+    height: 100, // Sesuaikan tinggi gambar sesuai kebutuhan
+    borderRadius: 10, // Sesuaikan radius border sesuai kebutuhan atau hilangkan jika tidak diperlukan
+    marginTop: 20, // Sesuaikan margin atas sesuai kebutuhan
+    marginBottom: 10, // Sesuaikan margin bawah sesuai kebutuhan
+    marginLeft: 10, // Sesuaikan margin kiri sesuai kebutuhan
+    marginRight: 10, // Sesuaikan margin kanan sesuai kebutuhan
+    resizeMode: "cover", // Sesuaikan tipe penyesuaian gambar sesuai kebutuhan
+    alignSelf: "center", // Sesuaikan aligment gambar sesuai kebutuhan
   },
 });
 

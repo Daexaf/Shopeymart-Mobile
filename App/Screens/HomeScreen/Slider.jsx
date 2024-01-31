@@ -11,30 +11,46 @@ export default function Slider() {
 
   useEffect(() => {
     fetchDataStore();
-    // getSlider();
-    // fetchDataProduct();
+    fetchDataProduct();
   }, []);
 
   useEffect(() => {
     getSlider();
   }, [store]);
 
+  useEffect(() => {
+    getSlider2();
+  }, [product]);
+
   const getSlider = () => {
     GlobalApi.getSlider().then((response) => {
       try {
         const formatted = response?.sliders.map((slider, index) => {
-          // console.log(slider.image);
           return {
             ...slider,
             name: store[index].name,
           };
         });
-        console.log("format");
         setSlider1(formatted);
       } catch (err) {
         console.log(err);
       }
-      // setSlider2(formatted);
+    });
+  };
+
+  const getSlider2 = () => {
+    GlobalApi.getSlider().then((response) => {
+      try {
+        const formatted = response?.sliders.map((slider, index) => {
+          return {
+            ...slider,
+            productName: product[index]?.name,
+          };
+        });
+        setSlider2(formatted);
+      } catch (err) {
+        console.log(err);
+      }
     });
   };
 
@@ -54,7 +70,7 @@ export default function Slider() {
     await axios
       .get(`http://192.168.222.125:8099/product`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setProduct(res.data);
       })
       .catch((err) => {
@@ -65,7 +81,7 @@ export default function Slider() {
   return (
     <>
       <View>
-        <Text style={styles.heading}>Offers of the Week</Text>
+        <Text style={styles.heading}>Our Best Store</Text>
         <FlatList
           data={slider1}
           horizontal
@@ -82,7 +98,7 @@ export default function Slider() {
         />
       </View>
       <View>
-        <Text style={styles.heading}>Offers of the Week</Text>
+        <Text style={styles.heading}>Our Best Product</Text>
         <FlatList
           data={slider2}
           horizontal
@@ -93,7 +109,7 @@ export default function Slider() {
                 source={{ uri: item?.image?.url }}
                 style={styles.sliderImage}
               />
-              <Text style={styles.title}>{item.name}</Text>
+              <Text style={styles.title}>{item.productName}</Text>
             </View>
           )}
         />
@@ -113,7 +129,6 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 20,
     // color: "#ECF0F1", // Ubah warna teks sesuai kebutuhan
-    marginBottom: 10,
     // fontFamily: "Oswald-bold",
     textAlign: "center",
     marginTop: 10,

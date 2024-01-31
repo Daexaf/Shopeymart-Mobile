@@ -2,14 +2,14 @@ import { View, Text } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../Screens/HomeScreen/HomeScreen";
-import BookingScreen from "../Screens/BookingScreen/BookingScreen";
+import BookingScreen from "../Screens/CategoryScreen/CategoryScreen";
 import ProfileScreen from "../Screens/ProfileScreen/ProfileScreen";
 import Color from "../components/Utils/Color";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import ServiceScreen from "../Screens/ServiceScreen/ServiceScreen";
-import { MaterialIcons } from "@expo/vector-icons";
+import ServiceScreen from "../Screens/PromoScreen/PromoScreen";
+import { FontAwesome } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
@@ -42,11 +42,11 @@ export default function TabNavigation() {
         options={{
           tabBarLabel: ({ color }) => (
             <Text style={{ color: color, fontSize: 14, marginTop: -7 }}>
-              Booking
+              Category
             </Text>
           ),
           tabBarIcon: ({ color, size }) => (
-            <Entypo name="bookmarks" size={24} color={Color.PRIMARY} />
+            <FontAwesome name="list" size={24} color={Color.PRIMARY} />
           ),
         }}
       />
@@ -56,15 +56,11 @@ export default function TabNavigation() {
         options={{
           tabBarLabel: ({ color }) => (
             <Text style={{ color: color, fontSize: 14, marginTop: -7 }}>
-              Our Services
+              Promo
             </Text>
           ),
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons
-              name="cleaning-services"
-              size={24}
-              color={Color.PRIMARY}
-            />
+            <Entypo name="ticket" size={24} color={Color.PRIMARY} />
           ),
         }}
       />

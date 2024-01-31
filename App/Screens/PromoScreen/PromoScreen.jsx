@@ -11,31 +11,31 @@ import Color from "../../components/Utils/Color";
 
 const datas = [
   {
-    title: "Full Service",
+    title: "Promo Elektronik",
     data: [
       {
-        name: "Home Cleaning",
-        price: "mulai dari 299 Ribu Rupiah",
+        name: "Sumsang ROD",
+        price: "mulai dari 12 Juta Ribu Rupiah",
         image: require("../../../assets/images/banner1.png"),
       },
     ],
   },
   {
-    title: "Premium Service",
+    title: "Promo Tagihan",
     data: [
       {
-        name: "Hydro Vacuum",
-        price: "mulai dari 199 Ribu Rupiah",
+        name: "Diskon 30% pembayaran listrik",
+        price: "sampai dengan 40 ribu",
         image: require("../../../assets/images/banner1.png"),
       },
     ],
   },
   {
-    title: "Another Service",
+    title: "Promo Jalan jalan",
     data: [
       {
-        name: "Pool Maintenance",
-        price: "mulai dari 99 Ribu Rupiah",
+        name: "Diskon 20% naik Kereta",
+        price: "mulai dari 30 Ribu",
         image: require("../../../assets/images/banner1.png"),
       },
     ],
@@ -52,16 +52,9 @@ const renderSeparator = () => (
     }}
   />
 );
-
-const renderFooter = () => (
-  <View style={{ padding: 16 }}>
-    <Text>Enjoy our list</Text>
-  </View>
-);
-
 const renderHeader = () => (
   <View style={styles.renderHead}>
-    <Text>Our Services.</Text>
+    <Text>PROMO</Text>
   </View>
 );
 
@@ -72,7 +65,6 @@ export default function ServiceScreen() {
         sections={datas}
         keyExtractor={(item, index) => item + index}
         ItemSeparatorComponent={renderSeparator}
-        ListFooterComponent={renderFooter}
         ListHeaderComponent={renderHeader}
         // inverted={true}
         renderItem={({ item }) => (
@@ -116,7 +108,7 @@ const styles = StyleSheet.create({
   renderHead: {
     textAlign: "center",
     padding: 16,
-    marginLeft: 130,
+    marginLeft: 150,
   },
   image: {
     width: 300, // sesuaikan lebar gambar sesuai kebutuhan
